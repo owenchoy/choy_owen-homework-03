@@ -6,6 +6,8 @@ format:
 execute: # for all code chunks
     warning: false # do not display warnings
     message: false # do not display messages
+editor_options: 
+  chunk_output_type: console
 ---
 
 **WARNING:** this document provides the foundation for your homework 3, but you will need to create your own neat, organized document to render for your homework submission. Create a new document for your homework in the `code` folder of this repository.   
@@ -95,11 +97,11 @@ ggpairs(drought_exp_clean, # data frame
 
 Choose 3 pairs of variables to compare. Make notes of those comparisons below.    
 
-**insert comparison 1 here**  
+**Leaf dry weight is highly positively correlated with total mass (Pearson’s r = 0.460).**  
 
-**insert comparison 2 here**  
+**Specific leaf area (sla) is highly positively correlated with root mass (Pearson’s r = 0.460).**  
 
-**insert comparison 3 here**
+**Shoot mass is highly positively correlated with total mass (Pearson’s r = 0.902).**
 
 ## Preliminary visualizations  
 
