@@ -315,7 +315,7 @@ ggplot() +
                  color = water_treatment)) +
   # model prediction 95% CI ribbon
   geom_ribbon(data = model_preds_for_plotting,
-              aes(x = sla, 
+              aes(x = species_name, 
                   y = predicted,
                   ymin = conf.low,
                   ymax = conf.high,
@@ -339,7 +339,7 @@ ggplot() +
 flextable::as_flextable(model1) 
 
 # another option for a single model
-gtsummary::tbl_regression(model1)
+gtsummary::tbl_regression(model4)
 
 # comparing models
 modelsummary::modelsummary( # this function takes a list of models
@@ -347,7 +347,8 @@ modelsummary::modelsummary( # this function takes a list of models
     "null" = model0, # "model name" = model object
     "model 1" = model1,
     "model 2" = model2,
-    "model 3" = model3
+    "model 3" = model3,
+    "model 4" = model4
   )
 ) 
 

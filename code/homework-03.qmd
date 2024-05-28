@@ -3,18 +3,103 @@ title: "homework-03"
 author: "Owen Choy"
 date: June 2 2024
 format: html
-editor: visual
+editor: source
 execute: 
+    
     warning: false
     message: false
-wrap: auto
-
+# commits: 3
+editor_options: 
+  chunk_output_type: console
 ---
-Forked repository:
+Link to forked repository:
 <https://github.com/owenchoy/choy_owen-homework-03>
 
+## setup
 
+```{r setup}
+# general use
+library(tidyverse)
+library(readxl)
+library(here)
+library(janitor)
 
+# visualizing pairs
+library(GGally)
+
+# model selection
+library(MuMIn)
+
+# model predictions
+library(ggeffects)
+
+# model tables
+library(gtsummary)
+library(flextable)
+library(modelsummary)
+
+drought_exp <- read_xlsx("/Users/owenchoy/Downloads/ENVS 193DS Statistics for Environmental Science/ENVS-193DS/git/choy-owen_homework-03/code/data/Valliere_etal_EcoApps_Data.xlsx",
+                          sheet = "First Harvest")
+```
+
+```{r cleanup}
+
+# cleaning
+drought_exp_clean <- drought_exp %>% 
+  clean_names() %>% # nicer column names
+  mutate(species_name = case_when( # adding column with species scientific names
+    species == "ENCCAL" ~ "Encelia californica", # bush sunflower
+    species == "ESCCAL" ~ "Eschscholzia californica", # California poppy
+    species == "PENCEN" ~ "Penstemon centranthifolius", # Scarlet bugler
+    species == "GRICAM" ~ "Grindelia camporum", # great valley gumweed
+    species == "SALLEU" ~ "Salvia leucophylla", # Purple sage
+    species == "STIPUL" ~ "Nasella pulchra", # Purple needlegrass
+    species == "LOTSCO" ~ "Acmispon glaber" # deerweed
+  )) %>% 
+  relocate(species_name, .after = species) %>% # moving species_name column after species
+  mutate(water_treatment = case_when( # adding column with full treatment names
+    water == "WW" ~ "Well watered",
+    water == "DS" ~ "Drought stressed"
+  )) %>% 
+  relocate(water_treatment, .after = water) # moving water_treatment column after water
+
+```
+
+```{r models}
+# Null model
+model0 <- lm(total_g ~ 1, 
+             data = drought_exp_clean)
+# total biomass as a function of SLA, water treatment, and species
+model1 <- lm(total_g ~ sla + water_treatment + species_name,
+             data = drought_exp_clean)
+# total biomass as a function of SLA and water treatment
+model2 <- lm(total_g ~ sla + water_treatment,
+             data = drought_exp_clean)
+# total biomass as a function of SLA and species 
+model3 <- lm(total_g ~ sla + species_name,
+             data = drought_exp_clean)
+# total biomass as a function of water treatment and species 
+model4 <- lm(total_g ~ water_treatment + species_name,
+             data = drought_exp_clean)
+
+par(mfrow = c(2, 2))
+plot(model0)
+plot(model1)
+plot(model2)
+plot(model3)
+plot(model4)
+
+# diagnostics test for all models look good: homoscedastic, normal, and no outliers
+
+# comparing all 5 models
+model.sel(model0,
+          model1, 
+          model2,
+          model3, 
+          model4)
+
+# conclusion: model4 is best
+```
 
 # Problem 1 Multiple linear regression: model selection and construction
 
@@ -22,7 +107,21 @@ a. Make a table or list of all the models from class and the last one you constr
 
 **Table 1** **Model predictions.**
 ```{r}
+model_comparison <- data.frame(
+  model = c("0", 
+            "1", 
+            "2", 
+            "3", 
+            "4"),
+  predictors = c("none", 
+                 "SLA, water treatment, species", 
+                 "SLA, water treatment",
+                 "SLA, species",
+                 "water treatment, species")
+)
 
+flextable(model_comparison) %>% 
+  set_table_properties(layout = "autofit")
 ```
 
 b. Write a 5-6 sentence “statistical methods” section
