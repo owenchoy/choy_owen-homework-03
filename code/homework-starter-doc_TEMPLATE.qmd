@@ -238,7 +238,7 @@ model.sel(model0,
           model4)
 ```
 
-Out of the four models we have tried, the best model is the one that includes **all predictors (SLA, water treatment, and species**
+Out of the four models we have tried, the best model is the one that includes **all predictors (SLA, water treatment, and species). However, the 5th model (model4) ended up being the best.**
 
 Note that this may change once you fit and compare the other model!
 
@@ -254,25 +254,26 @@ What are the reference levels?
 -   reference for `species_name`
 
 **reference for water_treatment:** **water_treatmentDrought stressed**\
-**reference for species_name:** **species_nameAgnispan glaber**
+**reference for species_name:** **species_nameAcmispon glaber**
 
 Interpret the model estimates for the:
 
--   intercept: **mass of Acmispan glaber in drought stressed treatment when SLA = 0**\
--   SLA slope: **across drought treatements and species, with each 1 unit increase in SLA (mm^2^/dry mass of leaf), we expect an increase in total mass of -0.00025 which means with the estimate and standard error there is no effect of SLA on total mass (because large p-value, small t-value, and estamite ± SE overlaps with 0**\
--   well watered estimate: **across species and SLA, well watered plants tend to be 0.12 ± 0.02 g heavier than drought stressed plantse**\
--   Lotus scoparius estimate: **insert response here**\
--   Stipa pulchra estimate: **insert response here**
+-   intercept: **mass of Acmispon glaber in drought stressed treatment when SLA = 0**\
+-   SLA slope: **across drought treatments and species, with each 1 unit increase in SLA (mm^2^/dry mass of leaf), we expect an increase in total mass of -0.00025 which means with the estimate and standard error there is no effect of SLA on total mass (because large p-value, small t-value, and estimate ± SE overlaps with 0**\
+-   well watered estimate: **across species and SLA, well watered plants tend to be 0.12 ± 0.02 g heavier than drought stressed plants**\
+-   Lotus scoparius estimate: **across water treatments and SLA OR on average, Lotus scoparius plants were -0.23 ± 0.032 g less than Encelia californica.**\
+-   Stipa pulchra estimate: **across water treatments and SLA or on average, Stipa pulchra plants are the same size as Encelia californica plants**
 
 # Model predictions
 
 **Note:** only plot terms in the model you select - if your doesn't include one of these terms, take it out and adjust the plotting code accordingly!
 
 ```{r}
-model_preds <- ggpredict(model1, 
-                         terms = c("sla",
-                                   "water_treatment", 
+model_preds <- ggpredict(model4, 
+                         terms = c("water_treatment", 
                                    "species_name"))
+
+View(model_preds)
 
 # use View(model_preds) to see the predictions as a data frame
 # use model_preds to see the predictions formatted nicely
@@ -298,9 +299,10 @@ The "more customizable" way:
 ```{r}
 # creating new data frame of model predictions for plotting
 model_preds_for_plotting <- model_preds %>% 
-  rename(sla = x, # renaming columns to make this easier to use
-         water_treatment = group,
-         species_name = facet)
+  rename(water_treatment = x,
+         species_name = group)
+
+View(model_preds_for_plotting) 
 
 # use View(model_preds_for_plotting) 
 # to compare this to the original model_preds data frame

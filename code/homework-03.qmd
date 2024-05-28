@@ -1,0 +1,95 @@
+---
+title: "homework-03"
+author: "Owen Choy"
+date: June 2 2024
+format: html
+editor: visual
+execute: 
+    warning: false
+    message: false
+wrap: auto
+
+---
+Forked repository:
+<https://github.com/owenchoy/choy_owen-homework-03>
+
+
+
+
+# Problem 1 Multiple linear regression: model selection and construction
+
+a. Make a table or list of all the models from class and the last one you constructed on your own. Write a caption for your table.
+
+**Table 1** **Model predictions.**
+```{r}
+
+```
+
+b. Write a 5-6 sentence “statistical methods” section
+
+Your answer should be in paragraph form and include:
+- how you addressed the central question(s) (i.e. to examine the influence of ____, ____, and ____ on _____, I…)
+- how you chose the final model (i.e. to determine the model that best described ____, I…)
+- how you visually determined that your final model conformed to the assumptions of a linear model (i.e. to evaluate linear model assumptions, I…)
+
+c. Make a visualization of the model predictions with underlying data for your “best” model.
+Show and annotate all your code. For full credit:
+- make the underlying data more transparent than the model predictions
+- display species names in full (not as species codes like ENCCAL or ESCCAL)
+- display water treatment types in full (not as WW or DS)
+- represent well-watered and drought stressed treatments with different colors
+- use colors that are not the default ggplot() colors
+- facet your plot by species
+- remove the legend
+- finalize the plot
+
+d. Write a caption for your visualization
+
+include a data citation
+
+e. Write a 3-4 sentence results section.
+
+Your answer should be in paragraph form and address the following points:
+- what predictors “best” described total mass (include model statistics here)?
+- on average, what differences did you find between water treatments?
+- on average, what differences did you find between species?
+
+
+# Problem 2 Affective visualization
+
+a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences).
+
+
+b. Create a sketch (on paper) of your idea.
+
+c. Make a draft of your visualization.
+
+d. Write an artist statement.
+
+An artist statement gives the audience context to understand your work. Write 4-5 sentences to address:
+- the content of your piece (what are you showing?)
+- the influences (what did techniques/artists/etc. did you find influential in creating your work?)
+- the form of your work (written code, watercolor, oil painting, etc.)
+- your process (how did you create your work?)
+
+# Problem 3 Statistical Critique
+
+a. Revisit and summarize
+What are the statistical tests the authors are using to address their main research question?
+
+Insert the figure or table you described in Homework 2 here.
+
+b. Visual clarity
+How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
+
+c. Aesthetic clarity
+How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
+
+d. Recommendations (can be longer than 4 sentences)
+What recommendations would you make to make the figure better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
+
+Alternatively, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
+
+
+
+
