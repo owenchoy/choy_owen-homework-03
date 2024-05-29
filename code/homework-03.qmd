@@ -8,7 +8,7 @@ execute:
     
     warning: false
     message: false
-# commits: 3
+# commits: 5
 editor_options: 
   chunk_output_type: console
 ---
@@ -106,9 +106,7 @@ summary(model4)
 
 # Problem 1 Multiple linear regression: model selection and construction
 
-a.  Make a table or list of all the models from class and the last one you constructed on your own. Write a caption for your table.
-
-**Table 1.** **Predictor variables of different models.** The table shows the predictor variables of five models that were analyzed. The null model (0) incorporates no predictor variables, while the saturated model (1) involves all three variables. SLA is the specific leaf area in mm^2^/g. Water treatment varied between "well watered" and "drought stressed". Plant species included *Encelia californica*, *Eschscholzia californica*, *Penstemon centranthifolius*, *Grindelia camporum*, *Salvia leucophylla*, *Nasella pulchra*, and *Acmispon glaber*. (Adapted from: Valliere, J. M., Zhang, J., Sharifi, M. R., & Rundel, P. W. (2019). Can we condition native plants to increase drought tolerance and improve restoration success? *Ecological Applications*, 29(3), e01863. <https://doi.org/10.1002/eap.1863>.)
+a. **Table 1.** **Predictor variables of different models.** The table shows the predictor variables of five models that were analyzed for the best ability of predicting plant biomass. The null model (0) incorporates no predictor variables, while the saturated model (1) involves all three variables. SLA is the specific leaf area in mm^2^/g. Water treatment varied between "well watered" and "drought stressed". "AIC" is the Akaike Information Criterion and a lower value represents a model that predicts the data best. A lower "delta" value also corresponds with a better predicitive model. 
 
 ```{r}
 #| echo: false
@@ -123,45 +121,81 @@ model_comparison <- data.frame(
                  "SLA, water treatment, species", 
                  "SLA, water treatment",
                  "SLA, species",
-                 "water treatment, species"))
+                 "water treatment, species"),
+  AIC = c("-156.2",
+          "-153.8",
+          "-124.1",
+          "-95.8",
+          "-75.0"),
+  delta = c("0.00",
+            "2.44",
+            "32.12",
+            "60.37",
+            "81.22")
+  
+)
 
 flextable(model_comparison) %>% 
   set_table_properties(layout = "autofit")
 ```
 
-b.  Write a 5-6 sentence “statistical methods” section
+b. To examine the influence of specific leaf area, water treatment, and species on the total plant mass, I constructed several multiple linear regression models with these predictor variables. I established five different models to determine which best described total plant biomass: the null model with zero predictor variables, the saturated model with all three predictor variables, and three other models with different combinations of predictor variables. To determine the best model, I assessed Akaike Information Criterion (AIC) of all five models and determined that Model 4 (with water treatment and species as predictor variables) was the best predictive linear model because it had the lowest AIC value. I then ran diagnostic tests to assess homoscedasticity, normality, and the potential influence of outliers for Model 4 to evaluate the conformity of the model to linear model assumptions. All tests demonstrated comformity to linear model assumptions because the Residuals vs Fitted and Scale-Location plots had no visual pattern which suggests homoscedastic residuals, data followed the linear trend in the QQ plot, and no outliers were outside of Cook's distance in the Residuals vs Factor Levels plot. This process led me to select Model 4 as the best linear regression model. 
 
-Your answer should be in paragraph form and include: 
-- how you addressed the central question(s) (i.e. to examine the influence of \_\_\_\_, \_\_\_\_, and \_\_\_\_ on \_\_\_\_\_, I…) 
-- how you chose the final model (i.e. to determine the model that best described \_\_\_\_, I…) 
-- how you visually determined that your final model conformed to the assumptions of a linear model (i.e. to evaluate linear model assumptions, I…)
-
-To examine the influence of specific leaf area, water treatment, and species on the total plant mass, I constructed a multiple linear regression model with these predictor variables. I established five different models to determine which best described total biomass: the null model with zero predictor variables, the saturated model with all three predictor variables, and three other models with different combinations of predictor variables. To determine the best model, I assessed Akaike Information Criterion (AIC) of all five models and determined that Model 4 (with water treatment and species as predictor variables) was the best predictive linear model because it had the lowest AIC value. I then ran diagnostic tests to assess homoscedasticity, normality, and the potential influence of outliers for Model 4 to evaluate the conformity of the model to linear model assumptions. All tests demonstrated comformity to linear model assumptions because the Residuals vs Fitted and Scale-Location plots had no visual pattern which suggests homoscedastic residuals, data followed the linear trend in the QQ plot, and no outliers were outside of Cook's distance in the Residuals vs Factor Levels plot. This process led me to select Model 4 as the best linear regression model. 
-
-c.  Make a visualization of the model predictions with underlying data for your “best” model. Show and annotate all your code. For full credit:
-
--   make the underlying data more transparent than the model predictions
--   display species names in full (not as species codes like ENCCAL or ESCCAL)
--   display water treatment types in full (not as WW or DS)
--   represent well-watered and drought stressed treatments with different colors
--   use colors that are not the default ggplot() colors
--   facet your plot by species
--   remove the legend
--   finalize the plot
-
+c.  
 ```{r}
+# creating new data frame of model predictions for plotting
+model_preds <- ggpredict(model4, 
+                         terms = c("water_treatment", 
+                                   "species_name"))
 
+model_preds_for_plotting <- model_preds %>% 
+  rename(water_treatment = x,
+         species_name = group)
+
+# plot
+ggplot() +
+  geom_point(data = drought_exp_clean, # underlying data
+             aes(x = water_treatment,
+                 y = total_g,
+                 group = species_name,
+                 color = water_treatment, # color by water treatment
+                 alpha = 0.1)) + # transparency
+  geom_errorbar(data = model_preds_for_plotting, # confidence intervals
+                aes(x = water_treatment,
+                    ymin = conf.low, # given CI boundaries
+                    ymax = conf.high,
+                    alpha = 0.1),
+                width = 0.15) + # width of CI bars
+  # geom_ribbon(data = model_preds_for_plotting, # model prediction 95% CI ribbon
+  #             aes(x = water_treatment, 
+  #                 y = predicted,
+  #                 ymin = conf.low, # low CI
+  #                 ymax = conf.high, # high CI
+  #                 group = species_name),
+  #             alpha = 0.2) + # transparency
+  geom_line(data = model_preds_for_plotting, # model prediction lines
+            aes(x = water_treatment, 
+                y = predicted,
+                group = species_name,
+                color = "lightgreen")) + # color prediction line
+  labs(x = "Water Treatment", # axis and title labels
+       y = "Total Biomass (g)",
+       title = "Effect of Water Treatment and Species on Total Plant Biomass") +
+  scale_color_manual(values = c("Well watered" = "#808FE1FF", # color by water treatment
+                                "Drought stressed" = "#EFC86EFF")) +
+  theme_classic() + # white theme
+  theme(legend.position = "None") + # remove legend
+  facet_wrap(~species_name) # separate plots by species
 ```
 
-
-
 d.  Write a caption for your visualization
-
-include a data citation
+#######come back to##########
+**Figure 1.** **Effect of Water Treatment and Species on Total Plant Biomass.** Plot shows the difference in total biomass (in grams) between well watered and drought stressed plants and across species. Blue points represent well-watered treatments and yellow points represent drought stressed treatments. The green line in each of the plots predicts 
+(Data source: Valliere, J. M., Zhang, J., Sharifi, M. R., & Rundel, P. W. (2019). Can we condition native plants to increase drought tolerance and improve restoration success? *Ecological Applications*, 29(3), e01863. <https://doi.org/10.1002/eap.1863>.)
 
 e.  Write a 3-4 sentence results section.
+The results indicate that water treatment and species are the best predictors for total plant biomass (linear regression, F(62,7) = 27.08, p \< 0.001, α = 0.05, Multiple R^2^ = 0.7535) and contribute to the best predictive model (multiple linear regression, normal distribution, AICc = -156.2, delta = 0.00). Holding species constant while using model predictions, well watered plants are expected to have 0.117 ± 0.017g more mass than drought stressed plants (t = 6.746, p \< 0.001, α = 0.05). On average, *Grindelia camporum* had the greatest difference in mass compared to the reference species *Acmispon glaber*, with a greater mass of 0.313 ± 0.032g (t = 9.662, p \< 0.001, α = 0.05).
 
-Your answer should be in paragraph form and address the following points: - what predictors “best” described total mass (include model statistics here)? - on average, what differences did you find between water treatments? - on average, what differences did you find between species?
 
 # Problem 2 Affective visualization
 
