@@ -8,7 +8,7 @@ execute:
     
     warning: false
     message: false
-# commits: 5
+# commits: 6
 editor_options: 
   chunk_output_type: console
 ---
@@ -106,7 +106,7 @@ summary(model4)
 
 # Problem 1 Multiple linear regression: model selection and construction
 
-a. **Table 1.** **Predictor variables of different models.** The table shows the predictor variables of five models that were analyzed for the best ability of predicting plant biomass. The null model (0) incorporates no predictor variables, while the saturated model (1) involves all three variables. SLA is the specific leaf area in mm^2^/g. Water treatment varied between "well watered" and "drought stressed". "AIC" is the Akaike Information Criterion and a lower value represents a model that predicts the data best. A lower "delta" value also corresponds with a better predicitive model. 
+a.  **Table 1.** **Predictor variables of different models.** The table shows the predictor variables of five models that were analyzed for the best ability of predicting plant biomass. The null model (0) incorporates no predictor variables, while the saturated model (1) involves all three variables. SLA is the specific leaf area in mm^2^/g. Water treatment varied between "well watered" and "drought stressed". "AIC" is the Akaike Information Criterion and a lower value represents a model that predicts the data best. A lower "delta" value also corresponds with a better predictive model.
 
 ```{r}
 #| echo: false
@@ -139,9 +139,10 @@ flextable(model_comparison) %>%
   set_table_properties(layout = "autofit")
 ```
 
-b. To examine the influence of specific leaf area, water treatment, and species on the total plant mass, I constructed several multiple linear regression models with these predictor variables. I established five different models to determine which best described total plant biomass: the null model with zero predictor variables, the saturated model with all three predictor variables, and three other models with different combinations of predictor variables. To determine the best model, I assessed Akaike Information Criterion (AIC) of all five models and determined that Model 4 (with water treatment and species as predictor variables) was the best predictive linear model because it had the lowest AIC value. I then ran diagnostic tests to assess homoscedasticity, normality, and the potential influence of outliers for Model 4 to evaluate the conformity of the model to linear model assumptions. All tests demonstrated comformity to linear model assumptions because the Residuals vs Fitted and Scale-Location plots had no visual pattern which suggests homoscedastic residuals, data followed the linear trend in the QQ plot, and no outliers were outside of Cook's distance in the Residuals vs Factor Levels plot. This process led me to select Model 4 as the best linear regression model. 
+b.  To examine the influence of specific leaf area, water treatment, and species on the total plant mass, I constructed several multiple linear regression models with these predictor variables. I established five different models to determine which best described total plant biomass: the null model with zero predictor variables, the saturated model with all three predictor variables, and three other models with different combinations of predictor variables. To determine the best model, I assessed Akaike Information Criterion (AIC) of all five models and determined that Model 4 (with water treatment and species as predictor variables) was the best predictive linear model because it had the lowest AIC value. I then ran diagnostic tests to assess homoscedasticity, normality, and the potential influence of outliers for Model 4 to evaluate the conformity of the model to linear model assumptions. All tests demonstrated comformity to linear model assumptions because the Residuals vs Fitted and Scale-Location plots had no visual pattern which suggests homoscedastic residuals, data followed the linear trend in the QQ plot, and no outliers were outside of Cook's distance in the Residuals vs Factor Levels plot. This process led me to select Model 4 as the best linear regression model.
 
 c.  
+
 ```{r}
 # creating new data frame of model predictions for plotting
 model_preds <- ggpredict(model4, 
@@ -188,14 +189,9 @@ ggplot() +
   facet_wrap(~species_name) # separate plots by species
 ```
 
-d.  Write a caption for your visualization
-#######come back to##########
-**Figure 1.** **Effect of Water Treatment and Species on Total Plant Biomass.** Plot shows the difference in total biomass (in grams) between well watered and drought stressed plants and across species. Blue points represent well-watered treatments and yellow points represent drought stressed treatments. The green line in each of the plots predicts 
-(Data source: Valliere, J. M., Zhang, J., Sharifi, M. R., & Rundel, P. W. (2019). Can we condition native plants to increase drought tolerance and improve restoration success? *Ecological Applications*, 29(3), e01863. <https://doi.org/10.1002/eap.1863>.)
+d.  Write a caption for your visualization #######come back to########## **Figure 1.** **Effect of Water Treatment and Species on Total Plant Biomass.** Plot shows the difference in total biomass (in grams) between well watered and drought stressed plants and across species. Blue points represent well-watered treatments and yellow points represent drought stressed treatments. The green line in each of the plots predicts (Data source: Valliere, J. M., Zhang, J., Sharifi, M. R., & Rundel, P. W. (2019). Can we condition native plants to increase drought tolerance and improve restoration success? *Ecological Applications*, 29(3), e01863. <https://doi.org/10.1002/eap.1863>.)
 
-e.  Write a 3-4 sentence results section.
-The results indicate that water treatment and species are the best predictors for total plant biomass (linear regression, F(62,7) = 27.08, p \< 0.001, α = 0.05, Multiple R^2^ = 0.7535) and contribute to the best predictive model (multiple linear regression, normal distribution, AICc = -156.2, delta = 0.00). Holding species constant while using model predictions, well watered plants are expected to have 0.117 ± 0.017g more mass than drought stressed plants (t = 6.746, p \< 0.001, α = 0.05). On average, *Grindelia camporum* had the greatest difference in mass compared to the reference species *Acmispon glaber*, with a greater mass of 0.313 ± 0.032g (t = 9.662, p \< 0.001, α = 0.05).
-
+e.  Write a 3-4 sentence results section. The results indicate that water treatment and species are the best predictors for total plant biomass (linear regression, F(62,7) = 27.08, p \< 0.001, α = 0.05, Multiple R^2^ = 0.7535) and contribute to the best predictive model (multiple linear regression, normal distribution, AICc = -156.2, delta = 0.00). Holding species constant while using model predictions, well watered plants are expected to have 0.117 ± 0.017g more mass than drought stressed plants (t = 6.746, p \< 0.001, α = 0.05). On average, *Grindelia camporum* had the greatest difference in mass compared to the reference species *Acmispon glaber*, with a greater mass of 0.313 ± 0.032g (t = 9.662, p \< 0.001, α = 0.05).
 
 # Problem 2 Affective visualization
 
@@ -210,15 +206,12 @@ d.  Write an artist statement.
 An artist statement gives the audience context to understand your work. Write 4-5 sentences to address: - the content of your piece (what are you showing?) - the influences (what did techniques/artists/etc. did you find influential in creating your work?) - the form of your work (written code, watercolor, oil painting, etc.) - your process (how did you create your work?)
 
 # Problem 3 Statistical Critique
+a. The authors are using ANOVA in their analysis. They used ANOVA to compare diets of quokka populations across sites and seasons and compared with the location of food plants, dietary diversity (H') scores, and sex. Their main research question asked what the diet and dietary preferences of different populations of quokkas in the northern Jarrah Forest were. The table below compared sites and seasons with diet.
 
-a.  Revisit and summarize What are the statistical tests the authors are using to address their main research question?
+![](images/Quokka%20Table%203.png){fig-align="center"}
 
-Insert the figure or table you described in Homework 2 here.
+b.  Plots lacked an x-axis title and some plots had two y-axes, which provided too much information in a crammed space. A legend was shown in one plot but omitted in later plots with similar information but more complexity, so it was not easy to distinguish what some of the groups were. Labels used abbreviations so the viewer has to find a reference to refer to in order to understand the labels, which was not always located in the figure caption. Summary statistics (mean and standard deviation) were displayed and described in the captions, but error bars were only shown in the positive direction and underlying data and model predictions were not included.
 
-b.  Visual clarity How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
+c.  The authors handled visual clutter a bit poorly for the plots that packed more information and data. Information in plots were often crammed and cluttered, and difficult to interpret because of the abundance of bars, lines, boxes, and variables. Lack of color and the gray-scale color scheme makes the figures seem dull and uninteresting. However, the data-ink ratio is pretty solid—there are no unnecessary lines or shapes that distract from the (complexity of the) data, and all dots, lines, bars, and boxes are described in the figure caption.
 
-c.  Aesthetic clarity How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
-
-d.  Recommendations (can be longer than 4 sentences) What recommendations would you make to make the figure better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
-
-Alternatively, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
+d.  I would recommend including a legend in the more complex and condensed figures to add clarity to the colored elements of the figures. Separating the plots with multiple y-axes into separate plots would also be beneficial to increase clarity and reduce visual clutter. Including an x-axis title would make it more clear on what the plots are comparing. Displaying x-axis labels at an angle would also help the viewer read the plot more easily without reducing aesthetic clarity. 
