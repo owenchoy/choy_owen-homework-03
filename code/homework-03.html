@@ -176,55 +176,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_g <span class="sc">~</span> water_treatment <span class="sc">+</span> species_name,</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> drought_exp_clean)</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="homework-03_files/figure-html/models-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="homework-03_files/figure-html/models-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="homework-03_files/figure-html/models-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="homework-03_files/figure-html/models-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="homework-03_files/figure-html/models-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># diagnostics test for all models look good: homoscedastic, normal, and no outliers</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># comparing all 5 models</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">model.sel</span>(model0,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>          model1, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>          model2,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>          model3, </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>          model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># comparing all 5 models</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">model.sel</span>(model0,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>          model1, </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>          model2,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>          model3, </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>          model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model selection table 
           (Int)        sla spc_nam wtr_trt df logLik   AICc delta weight
@@ -235,7 +192,49 @@ model2  0.04670  0.0012810               +  4 52.220  -95.8 60.37  0.000
 model0  0.27900                             2 39.580  -75.0 81.22  0.000
 Models ranked by AICc(x) </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conclusion: model4 is best</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model4 is best</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#diagnostic test</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework-03_files/figure-html/models-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conslusion: diagnostics test for model 4 looks good: homoscedastic, normal, and no outliers, so model4 is good to use</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary data for best model which includes slope and intercept</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = total_g ~ water_treatment + species_name, data = drought_exp_clean)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.157087 -0.046953 -0.003733  0.041244  0.192657 
+
+Coefficients:
+                                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                             0.05455    0.02451   2.225  0.02973 *  
+water_treatmentWell watered             0.11695    0.01733   6.746 5.90e-09 ***
+species_nameEncelia californica         0.21774    0.03243   6.714 6.70e-09 ***
+species_nameEschscholzia californica    0.23164    0.03243   7.143 1.22e-09 ***
+species_nameGrindelia camporum          0.31335    0.03243   9.662 5.53e-14 ***
+species_nameNasella pulchra             0.22881    0.03243   7.055 1.72e-09 ***
+species_namePenstemon centranthifolius  0.05003    0.03243   1.543  0.12799    
+species_nameSalvia leucophylla          0.12020    0.03243   3.706  0.00045 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.07252 on 62 degrees of freedom
+Multiple R-squared:  0.7535,    Adjusted R-squared:  0.7257 
+F-statistic: 27.08 on 7 and 62 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
 </div>
 </section>
 <section id="problem-1-multiple-linear-regression-model-selection-and-construction" class="level1">
@@ -243,31 +242,17 @@ Models ranked by AICc(x) </code></pre>
 <ol type="a">
 <li>Make a table or list of all the models from class and the last one you constructed on your own. Write a caption for your table.</li>
 </ol>
-<p><strong>Table 1</strong> <strong>Model predictions.</strong></p>
+<p><strong>Table 1.</strong> <strong>Predictor variables of different models.</strong> The table shows the predictor variables of five models that were analyzed. The null model (0) incorporates no predictor variables, while the saturated model (1) involves all three variables. SLA is the specific leaf area in mm<sup>2</sup>/g. Water treatment varied between “well watered” and “drought stressed”. Plant species included <em>Encelia californica</em>, <em>Eschscholzia californica</em>, <em>Penstemon centranthifolius</em>, <em>Grindelia camporum</em>, <em>Salvia leucophylla</em>, <em>Nasella pulchra</em>, and <em>Acmispon glaber</em>. (Adapted from: Valliere, J. M., Zhang, J., Sharifi, M. R., &amp; Rundel, P. W. (2019). Can we condition native plants to increase drought tolerance and improve restoration success? <em>Ecological Applications</em>, 29(3), e01863. <a href="https://doi.org/10.1002/eap.1863" class="uri">https://doi.org/10.1002/eap.1863</a>.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"0"</span>, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"1"</span>, </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"2"</span>, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"3"</span>, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"4"</span>),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">"none"</span>, </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"SLA, water treatment, species"</span>, </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"SLA, water treatment"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"SLA, species"</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"water treatment, species"</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">flextable</span>(model_comparison) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_table_properties</span>(<span class="at">layout =</span> <span class="st">"autofit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-53099b34{table-layout:auto;}.cl-5305a7ea{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-5307b260{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5307bcb0{background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5307bcb1{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5307bcba{background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-53099b34"><thead><tr style="overflow-wrap:break-word;"><th class="cl-5307bcb0"><p class="cl-5307b260"><span class="cl-5305a7ea">model</span></p></th><th class="cl-5307bcb0"><p class="cl-5307b260"><span class="cl-5305a7ea">predictors</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">0</span></p></td><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">none</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">1</span></p></td><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">SLA, water treatment, species</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">2</span></p></td><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">SLA, water treatment</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">3</span></p></td><td class="cl-5307bcb1"><p class="cl-5307b260"><span class="cl-5305a7ea">SLA, species</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5307bcba"><p class="cl-5307b260"><span class="cl-5305a7ea">4</span></p></td><td class="cl-5307bcba"><p class="cl-5307b260"><span class="cl-5305a7ea">water treatment, species</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-bde81fba{table-layout:auto;}.cl-bde545f6{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bde6665c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bde66e86{background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bde66e90{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bde66e91{background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-bde81fba"><thead><tr style="overflow-wrap:break-word;"><th class="cl-bde66e86"><p class="cl-bde6665c"><span class="cl-bde545f6">model_number</span></p></th><th class="cl-bde66e86"><p class="cl-bde6665c"><span class="cl-bde545f6">predictors</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">0</span></p></td><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">none</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">1</span></p></td><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">SLA, water treatment, species</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">2</span></p></td><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">SLA, water treatment</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">3</span></p></td><td class="cl-bde66e90"><p class="cl-bde6665c"><span class="cl-bde545f6">SLA, species</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bde66e91"><p class="cl-bde6665c"><span class="cl-bde545f6">4</span></p></td><td class="cl-bde66e91"><p class="cl-bde6665c"><span class="cl-bde545f6">water treatment, species</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 <ol start="2" type="a">
 <li>Write a 5-6 sentence “statistical methods” section</li>
 </ol>
 <p>Your answer should be in paragraph form and include: - how you addressed the central question(s) (i.e.&nbsp;to examine the influence of ____, ____, and ____ on _____, I…) - how you chose the final model (i.e.&nbsp;to determine the model that best described ____, I…) - how you visually determined that your final model conformed to the assumptions of a linear model (i.e.&nbsp;to evaluate linear model assumptions, I…)</p>
+<p>To examine the influence of specific leaf area, water treatment, and species on the total plant mass, I constructed a multiple linear regression model with these predictor variables. I established five different models to determine which best described total biomass: the null model with zero predictor variables, the saturated model with all three predictor variables, and three other models with different combinations of predictor variables. To determine the best model, I assessed Akaike Information Criterion (AIC) of all five models and determined that Model 4 (with water treatment and species as predictor variables) was the best predictive linear model because it had the lowest AIC value. I then ran diagnostic tests to assess homoscedasticity, normality, and the potential influence of outliers for Model 4 to evaluate the conformity of the model to linear model assumptions. All tests demonstrated comformity to linear model assumptions because the Residuals vs Fitted and Scale-Location plots had no visual pattern which suggests homoscedastic residuals, data followed the linear trend in the QQ plot, and no outliers were outside of Cook’s distance in the Residuals vs Factor Levels plot. This process led me to select Model 4 as the best linear regression model.</p>
 <ol start="3" type="a">
 <li>Make a visualization of the model predictions with underlying data for your “best” model. Show and annotate all your code. For full credit:</li>
 </ol>

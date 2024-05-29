@@ -12,8 +12,8 @@ execute:
 editor_options: 
   chunk_output_type: console
 ---
-Link to forked repository:
-<https://github.com/owenchoy/choy_owen-homework-03>
+
+Link to forked repository: <https://github.com/owenchoy/choy_owen-homework-03>
 
 ## setup
 
@@ -82,15 +82,6 @@ model3 <- lm(total_g ~ sla + species_name,
 model4 <- lm(total_g ~ water_treatment + species_name,
              data = drought_exp_clean)
 
-par(mfrow = c(2, 2))
-plot(model0)
-plot(model1)
-plot(model2)
-plot(model3)
-plot(model4)
-
-# diagnostics test for all models look good: homoscedastic, normal, and no outliers
-
 # comparing all 5 models
 model.sel(model0,
           model1, 
@@ -98,17 +89,32 @@ model.sel(model0,
           model3, 
           model4)
 
-# conclusion: model4 is best
+# model4 is best
+
+#diagnostic test
+par(mfrow = c(2, 2))
+plot(model4)
+
+# conslusion: diagnostics test for model 4 looks good: homoscedastic, normal, and no outliers, so model4 is good to use
+
+```
+
+```{r summary}
+# summary data for best model which includes slope and intercept
+summary(model4)
 ```
 
 # Problem 1 Multiple linear regression: model selection and construction
 
-a. Make a table or list of all the models from class and the last one you constructed on your own. Write a caption for your table.
+a.  Make a table or list of all the models from class and the last one you constructed on your own. Write a caption for your table.
 
-**Table 1** **Model predictions.**
+**Table 1.** **Predictor variables of different models.** The table shows the predictor variables of five models that were analyzed. The null model (0) incorporates no predictor variables, while the saturated model (1) involves all three variables. SLA is the specific leaf area in mm^2^/g. Water treatment varied between "well watered" and "drought stressed". Plant species included *Encelia californica*, *Eschscholzia californica*, *Penstemon centranthifolius*, *Grindelia camporum*, *Salvia leucophylla*, *Nasella pulchra*, and *Acmispon glaber*. (Adapted from: Valliere, J. M., Zhang, J., Sharifi, M. R., & Rundel, P. W. (2019). Can we condition native plants to increase drought tolerance and improve restoration success? *Ecological Applications*, 29(3), e01863. <https://doi.org/10.1002/eap.1863>.)
+
 ```{r}
+#| echo: false
+
 model_comparison <- data.frame(
-  model = c("0", 
+  model_number = c("0", 
             "1", 
             "2", 
             "3", 
@@ -117,78 +123,68 @@ model_comparison <- data.frame(
                  "SLA, water treatment, species", 
                  "SLA, water treatment",
                  "SLA, species",
-                 "water treatment, species")
-)
+                 "water treatment, species"))
 
 flextable(model_comparison) %>% 
   set_table_properties(layout = "autofit")
 ```
 
-b. Write a 5-6 sentence “statistical methods” section
+b.  Write a 5-6 sentence “statistical methods” section
 
-Your answer should be in paragraph form and include:
-- how you addressed the central question(s) (i.e. to examine the influence of ____, ____, and ____ on _____, I…)
-- how you chose the final model (i.e. to determine the model that best described ____, I…)
+Your answer should be in paragraph form and include: 
+- how you addressed the central question(s) (i.e. to examine the influence of \_\_\_\_, \_\_\_\_, and \_\_\_\_ on \_\_\_\_\_, I…) 
+- how you chose the final model (i.e. to determine the model that best described \_\_\_\_, I…) 
 - how you visually determined that your final model conformed to the assumptions of a linear model (i.e. to evaluate linear model assumptions, I…)
 
-c. Make a visualization of the model predictions with underlying data for your “best” model.
-Show and annotate all your code. For full credit:
-- make the underlying data more transparent than the model predictions
-- display species names in full (not as species codes like ENCCAL or ESCCAL)
-- display water treatment types in full (not as WW or DS)
-- represent well-watered and drought stressed treatments with different colors
-- use colors that are not the default ggplot() colors
-- facet your plot by species
-- remove the legend
-- finalize the plot
+To examine the influence of specific leaf area, water treatment, and species on the total plant mass, I constructed a multiple linear regression model with these predictor variables. I established five different models to determine which best described total biomass: the null model with zero predictor variables, the saturated model with all three predictor variables, and three other models with different combinations of predictor variables. To determine the best model, I assessed Akaike Information Criterion (AIC) of all five models and determined that Model 4 (with water treatment and species as predictor variables) was the best predictive linear model because it had the lowest AIC value. I then ran diagnostic tests to assess homoscedasticity, normality, and the potential influence of outliers for Model 4 to evaluate the conformity of the model to linear model assumptions. All tests demonstrated comformity to linear model assumptions because the Residuals vs Fitted and Scale-Location plots had no visual pattern which suggests homoscedastic residuals, data followed the linear trend in the QQ plot, and no outliers were outside of Cook's distance in the Residuals vs Factor Levels plot. This process led me to select Model 4 as the best linear regression model. 
 
-d. Write a caption for your visualization
+c.  Make a visualization of the model predictions with underlying data for your “best” model. Show and annotate all your code. For full credit:
+
+-   make the underlying data more transparent than the model predictions
+-   display species names in full (not as species codes like ENCCAL or ESCCAL)
+-   display water treatment types in full (not as WW or DS)
+-   represent well-watered and drought stressed treatments with different colors
+-   use colors that are not the default ggplot() colors
+-   facet your plot by species
+-   remove the legend
+-   finalize the plot
+
+```{r}
+
+```
+
+
+
+d.  Write a caption for your visualization
 
 include a data citation
 
-e. Write a 3-4 sentence results section.
+e.  Write a 3-4 sentence results section.
 
-Your answer should be in paragraph form and address the following points:
-- what predictors “best” described total mass (include model statistics here)?
-- on average, what differences did you find between water treatments?
-- on average, what differences did you find between species?
-
+Your answer should be in paragraph form and address the following points: - what predictors “best” described total mass (include model statistics here)? - on average, what differences did you find between water treatments? - on average, what differences did you find between species?
 
 # Problem 2 Affective visualization
 
-a. Describe in words what an affective visualization could look like for your personal data (3-5 sentences).
+a.  Describe in words what an affective visualization could look like for your personal data (3-5 sentences).
 
+b.  Create a sketch (on paper) of your idea.
 
-b. Create a sketch (on paper) of your idea.
+c.  Make a draft of your visualization.
 
-c. Make a draft of your visualization.
+d.  Write an artist statement.
 
-d. Write an artist statement.
-
-An artist statement gives the audience context to understand your work. Write 4-5 sentences to address:
-- the content of your piece (what are you showing?)
-- the influences (what did techniques/artists/etc. did you find influential in creating your work?)
-- the form of your work (written code, watercolor, oil painting, etc.)
-- your process (how did you create your work?)
+An artist statement gives the audience context to understand your work. Write 4-5 sentences to address: - the content of your piece (what are you showing?) - the influences (what did techniques/artists/etc. did you find influential in creating your work?) - the form of your work (written code, watercolor, oil painting, etc.) - your process (how did you create your work?)
 
 # Problem 3 Statistical Critique
 
-a. Revisit and summarize
-What are the statistical tests the authors are using to address their main research question?
+a.  Revisit and summarize What are the statistical tests the authors are using to address their main research question?
 
 Insert the figure or table you described in Homework 2 here.
 
-b. Visual clarity
-How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
+b.  Visual clarity How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
 
-c. Aesthetic clarity
-How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
+c.  Aesthetic clarity How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
 
-d. Recommendations (can be longer than 4 sentences)
-What recommendations would you make to make the figure better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
+d.  Recommendations (can be longer than 4 sentences) What recommendations would you make to make the figure better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
 
 Alternatively, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
-
-
-
-
