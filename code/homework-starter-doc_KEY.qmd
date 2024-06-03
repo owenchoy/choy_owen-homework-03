@@ -6,6 +6,8 @@ format:
 execute: # for all code chunks
     warning: false # do not display warnings
     message: false # do not display messages
+editor_options: 
+  chunk_output_type: console
 ---
 
 **WARNING:** this document provides the foundation for your homework 3, but you will need to create your own neat, organized document to render for your homework submission. Create a new document for your homework in the `code` folder of this repository.   
@@ -262,7 +264,7 @@ Interpret the model estimates for the:
 **Note:** only plot terms in the model you select - if your doesn't include one of these terms, take it out and adjust the plotting code accordingly!
 
 ```{r model-predictions-data-frame}
-model_preds <- ggpredict(model1, 
+model_preds1 <- ggpredict(model1, 
                          terms = c("sla",
                                    "water_treatment", 
                                    "species_name"))
@@ -277,7 +279,7 @@ model_preds <- ggpredict(model1,
 
 ```{r model-predictions-with-ggeffects}
 # plot function within ggeffects
-plot(model_preds, # model predictions
+plot(model_preds1, # model predictions
      limit_range = TRUE, # limit the range of predictions to the range of predictor values
      show_data = TRUE) + # show the underlying data
   # everything below this is ggplot() stuff
@@ -290,7 +292,7 @@ The "more customizable" way:
 
 ```{r model-predictions-with-ggplot}
 # creating new data frame of model predictions for plotting
-model_preds_for_plotting <- model_preds %>% 
+model_preds_for_plotting1 <- model_preds1 %>% 
   rename(sla = x, # renaming columns to make this easier to use
          water_treatment = group,
          species_name = facet)
@@ -305,7 +307,7 @@ ggplot() +
                  y = total_g,
                  color = water_treatment)) +
   # model prediction 95% CI ribbon
-  geom_ribbon(data = model_preds_for_plotting,
+  geom_ribbon(data = model_preds_for_plotting1,
               aes(x = sla, 
                   y = predicted,
                   ymin = conf.low,
@@ -313,7 +315,7 @@ ggplot() +
                   fill = water_treatment),
               alpha = 0.2) +
   # model prediction lines
-  geom_line(data = model_preds_for_plotting,
+  geom_line(data = model_preds_for_plotting1,
             aes(x = sla, 
                 y = predicted,
                 color = water_treatment)) +

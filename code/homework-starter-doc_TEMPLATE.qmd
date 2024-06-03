@@ -302,7 +302,7 @@ model_preds_for_plotting <- model_preds %>%
   rename(water_treatment = x,
          species_name = group)
 
-View(model_preds_for_plotting) 
+# View(model_preds_for_plotting) 
 
 # use View(model_preds_for_plotting) 
 # to compare this to the original model_preds data frame
